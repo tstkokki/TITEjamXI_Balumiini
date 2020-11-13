@@ -11,6 +11,6 @@ Umbrella
 
 
 Iida: kuppi, lautanen mallit
-lasikuppi, posliini, eri värisiä donitseja
+lasikuppi, posiliini, eri värisiä donitseja
 
 Spoon spring
