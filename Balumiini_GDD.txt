@@ -1,0 +1,16 @@
+ESCAPE
+
+Nouseva vesi. Paeta. Vesisade
+2D perspektiivi
+Vertikaalinen tasohyppely
+
+Camera: fixed on x axis, follow player on y-axis
+
+Pelihahmo: Sugarman of cubes
+Umbrella
+
+
+Iida: kuppi, lautanen mallit
+lasikuppi, posliini, eri värisiä donitseja
+
+Spoon spring
