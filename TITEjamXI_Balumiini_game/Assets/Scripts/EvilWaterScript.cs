@@ -1,15 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EvilWaterScript : MonoBehaviour
 {
     Vector3 rising = new Vector3(0, 0.2f, 0);
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    
 
     private void FixedUpdate()
     {
@@ -20,5 +17,13 @@ public class EvilWaterScript : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("SugarDaddy"))
+        {
+            SceneManager.LoadScene(1);
+        }
     }
 }

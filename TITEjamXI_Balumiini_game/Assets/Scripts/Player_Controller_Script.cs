@@ -22,10 +22,15 @@ public class Player_Controller_Script : MonoBehaviour
     private bool isGrounded;
     public LayerMask groundMask;
 
+    [Header("Effects")]
+    public ParticleSystem SplashEffect;
+    private ParticleSystem _splash;
     // Start is called before the first frame update
     void Start()
     {
         sugarCtrl = GetComponent<CharacterController>();
+        _splash = Instantiate(SplashEffect, transform);
+        _splash.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -64,5 +69,16 @@ public class Player_Controller_Script : MonoBehaviour
         dir.x = xMove;
         //transform.Translate(dir.normalized * moveSpeed * Time.deltaTime);
         sugarCtrl.Move(dir * Time.deltaTime);
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.gameObject.layer);
+        if(other.gameObject.layer == 4)
+        {
+            _splash.gameObject.SetActive(true);
+            _splash.Play();
+        }
     }
 }
