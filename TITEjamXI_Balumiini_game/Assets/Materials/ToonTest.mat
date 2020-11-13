@@ -34,11 +34,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_F41C9C84:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: bc918c136153fe64aa5441885e7958c4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_FDA380B0:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: a66d332bbc02ae54f82c59608f5c9e41, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -70,9 +70,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_604A66DE: 10
-    - Vector1_78161866: -1
-    - Vector1_FA6230E1: 20
+    - Vector1_604A66DE: 18.8
+    - Vector1_78161866: -5.6
+    - Vector1_FA6230E1: 110
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -101,7 +101,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _L1_color: {r: 0, g: 0, b: 0, a: 0}
+    - _L1_color: {r: 1, g: 1, b: 1, a: 0}
     - _L1_dir: {r: 0, g: 0, b: 0, a: 0}
     - _L2_color: {r: 0, g: 0, b: 0, a: 0}
     - _L2_dir: {r: 0, g: 0, b: 0, a: 0}
