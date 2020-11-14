@@ -9,10 +9,13 @@ public class UI_Master_Script : MonoBehaviour
     public float curHeight = 0f;
     private float step = 0f;
     private float wallStep = 0f;
+    private int platScale = 1;
     public float playTime = 0f;
+    public int sugarScore = 0;
     public TextMeshProUGUI heightText;
     public TextMeshProUGUI timeText;
     public TextMeshProUGUI diffText;
+    public TextMeshProUGUI scoreText;
     private Transform Player;
 
     [Header("Masters")]
@@ -44,6 +47,7 @@ public class UI_Master_Script : MonoBehaviour
         evilWater = FindObjectOfType<EvilWaterScript>();
         sugarMaster = FindObjectOfType<Sugar_Master_Script>();
         diffText.text = curTide.ToString();
+        scoreText.text = "0 sucrose";
     }
 
     private void FixedUpdate()
@@ -84,11 +88,7 @@ public class UI_Master_Script : MonoBehaviour
         {
             DifficultyUpdate();
         }
-        if (curTide == WaterState.Flood && playTime >= 160f)
-        {
-            DifficultyUpdate();
-        }
-        if (curTide == WaterState.Tsunami && playTime >= 200f)
+        if (curTide == WaterState.Flood && playTime >= 180f)
         {
             DifficultyUpdate();
         }
@@ -101,7 +101,6 @@ public class UI_Master_Script : MonoBehaviour
         string _diff = curTide.ToString();
         for(int i = 0; i < _diff.Length; i++)
         {
-            Debug.Log("Iterating " + _diff);
             if(char.IsUpper(_diff[i]) && i > 0)
             {
                 _diff = _diff.Substring(0, i) + " " + _diff.Substring(i);
@@ -109,6 +108,8 @@ public class UI_Master_Script : MonoBehaviour
             }
         }
         diffText.text = _diff;
+        platScale = (int)curTide;
+        platMaster.SetPlatScale(platScale);
     }
 
     void CalcPlayerHeight()
@@ -131,5 +132,12 @@ public class UI_Master_Script : MonoBehaviour
             wallMaster.SpawnNextPlatform();
             sugarMaster.SpawnNextPlatform(Player.position.y);
         }
+    }
+
+    public int IncreaseSugarScore(int _score)
+    {
+        sugarScore += _score;
+        scoreText.text = sugarScore.ToString() + " sucrose";
+        return sugarScore;
     }
 }

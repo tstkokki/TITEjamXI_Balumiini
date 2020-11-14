@@ -211,6 +211,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: mummo1
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 8a1314f502b7dcc49bb0d38f37de87dc,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 500a994f6177be844b6f517433dc7c25, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a1314f502b7dcc49bb0d38f37de87dc, type: 3}
 --- !u!4 &8250200779554822429 stripped
