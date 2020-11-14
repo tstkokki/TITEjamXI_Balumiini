@@ -33,6 +33,10 @@ public class Player_Controller_Script : MonoBehaviour
     /*Sound listing
      0 = Jump
      1 = water splash
+     2 = walking
+     3 = running
+     4 = yummy
+     5 = coin sugar pickup
          */
          /*Effect listing
           * 0 = splash
@@ -75,7 +79,6 @@ public class Player_Controller_Script : MonoBehaviour
             if(Input.GetButtonDown("Jump"))
             {
                 yMove = Mathf.Sqrt(jumpHeight * -2f * gravity);
-                playerAudio.Stop();
                 playerAudio.PlayOneShot(playerSounds[0]);
             }
         }
@@ -120,6 +123,9 @@ public class Player_Controller_Script : MonoBehaviour
         if (other.gameObject.CompareTag("Collectable"))
         {
             Debug.Log("Collided with sugar");
+            playerAudio.PlayOneShot(playerSounds[4]);
+            playerAudio.PlayOneShot(playerSounds[5]);
+            other.gameObject.transform.parent.gameObject.SetActive(false);
         }
     }
 }

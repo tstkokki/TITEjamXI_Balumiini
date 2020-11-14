@@ -19,6 +19,7 @@ public class UI_Master_Script : MonoBehaviour
     public Platform_Master_Script platMaster;
     public Wall_Master_Script wallMaster;
     public EvilWaterScript evilWater;
+    public Sugar_Master_Script sugarMaster;
 
 
 
@@ -41,6 +42,7 @@ public class UI_Master_Script : MonoBehaviour
         platMaster = FindObjectOfType<Platform_Master_Script>();
         wallMaster = FindObjectOfType<Wall_Master_Script>();
         evilWater = FindObjectOfType<EvilWaterScript>();
+        sugarMaster = FindObjectOfType<Sugar_Master_Script>();
         diffText.text = curTide.ToString();
     }
 
@@ -127,6 +129,7 @@ public class UI_Master_Script : MonoBehaviour
         {
             wallStep = curHeight;
             wallMaster.SpawnNextPlatform();
+            sugarMaster.SpawnNextPlatform(Player.position.y);
         }
     }
 }
