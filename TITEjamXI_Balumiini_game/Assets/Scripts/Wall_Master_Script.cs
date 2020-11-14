@@ -18,7 +18,6 @@ public class Wall_Master_Script : MonoBehaviour
 
     public void SpawnNextPlatform()
     {
-        Debug.Log("Called walls");
         GameObject nextPlat = wallPooler.GetPooledObjecT();
         if (nextPlat == null)
         {

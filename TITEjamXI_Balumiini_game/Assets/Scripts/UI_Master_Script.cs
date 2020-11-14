@@ -12,6 +12,7 @@ public class UI_Master_Script : MonoBehaviour
     public float playTime = 0f;
     public TextMeshProUGUI heightText;
     public TextMeshProUGUI timeText;
+    public TextMeshProUGUI diffText;
     private Transform Player;
 
     [Header("Masters")]
@@ -40,6 +41,7 @@ public class UI_Master_Script : MonoBehaviour
         platMaster = FindObjectOfType<Platform_Master_Script>();
         wallMaster = FindObjectOfType<Wall_Master_Script>();
         evilWater = FindObjectOfType<EvilWaterScript>();
+        diffText.text = curTide.ToString();
     }
 
     private void FixedUpdate()
@@ -55,10 +57,56 @@ public class UI_Master_Script : MonoBehaviour
     void CalcTime()
     {
         playTime += Time.fixedDeltaTime;
-        if(curTide == WaterState.Low && playTime >= 15f)
+        timeText.text = playTime.ToString("0.00") + " s";
+        if(curTide == WaterState.Low && playTime >= 10f)
         {
-
+            DifficultyUpdate();
         }
+        if (curTide == WaterState.Intermediate && playTime >= 20f)
+        {
+            DifficultyUpdate();
+        }
+        if (curTide == WaterState.Hard && playTime >= 35f)
+        {
+            DifficultyUpdate();
+        }
+        if (curTide == WaterState.GettingMoist && playTime >= 50f)
+        {
+            DifficultyUpdate();
+        }
+        if (curTide == WaterState.Splashy && playTime >= 110f)
+        {
+            DifficultyUpdate();
+        }
+        if (curTide == WaterState.BathroomLeakage && playTime >= 130f)
+        {
+            DifficultyUpdate();
+        }
+        if (curTide == WaterState.Flood && playTime >= 160f)
+        {
+            DifficultyUpdate();
+        }
+        if (curTide == WaterState.Tsunami && playTime >= 200f)
+        {
+            DifficultyUpdate();
+        }
+    }
+
+    void DifficultyUpdate()
+    {
+        curTide = (WaterState)curTide + 1;
+        evilWater.IncreaseTide((float)curTide);
+        string _diff = curTide.ToString();
+        for(int i = 0; i < _diff.Length; i++)
+        {
+            Debug.Log("Iterating " + _diff);
+            if(char.IsUpper(_diff[i]) && i > 0)
+            {
+                _diff = _diff.Substring(0, i) + " " + _diff.Substring(i);
+                break;
+            }
+        }
+        diffText.text = _diff;
     }
 
     void CalcPlayerHeight()

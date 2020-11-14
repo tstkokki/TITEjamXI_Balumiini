@@ -25,4 +25,10 @@ public class EvilWaterScript : MonoBehaviour
             SceneManager.LoadScene(1);
         }
     }
+
+    public void IncreaseTide(float _speedUp)
+    {
+        risingSpeed += _speedUp/10;
+        Debug.Log(risingSpeed);
+    }
 }

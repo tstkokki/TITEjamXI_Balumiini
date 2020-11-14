@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Platform_Phasing_Script : MonoBehaviour
 {
-    private Collider collider;
+    private new Collider collider;
     private float liftTimer = 0f;
     private bool setTrigger = false;
     // Start is called before the first frame update
     void Start()
     {
         collider = transform.parent.GetComponent<Collider>();
-        if (collider != null) Debug.Log("Collider found");
+        //if (collider != null) Debug.Log("Collider found");
     }
 
     // Update is called once per frame
