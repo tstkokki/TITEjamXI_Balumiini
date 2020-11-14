@@ -23,11 +23,12 @@ public class Player_Controller_Script : MonoBehaviour
     public Transform groundCheck; //object at the feet of character
     private bool isGrounded;
     public LayerMask groundMask;
+    public int tornadoPoints = 0;
+    public float tornadoCD = 1.0f;
 
     [Header("Effects")]
     public ParticleSystem[] PlayerEffects;
-    private ParticleSystem _splash;
-    private ParticleSystem _land;
+    private List<ParticleSystem> effectsPool = new List<ParticleSystem>();
     public AudioSource playerAudio;
     public AudioClip []playerSounds;
     /*Sound listing
@@ -37,10 +38,13 @@ public class Player_Controller_Script : MonoBehaviour
      3 = running
      4 = yummy
      5 = coin sugar pickup
+     6 = tornado
          */
          /*Effect listing
           * 0 = splash
           * 1 = land
+          * 2 = pow
+          * 3 = tornado
          */
 
     // Start is called before the first frame update
@@ -48,10 +52,13 @@ public class Player_Controller_Script : MonoBehaviour
     {
         sugarCtrl = GetComponent<CharacterController>();
         playerAudio = GetComponent<AudioSource>();
-        _splash = Instantiate(PlayerEffects[0], transform);
-        _land = Instantiate(PlayerEffects[1], transform);
-        _splash.gameObject.SetActive(false);
-        _land.gameObject.SetActive(false);
+
+        for(int i = 0; i < PlayerEffects.Length; i++)
+        {
+            ParticleSystem _eff = Instantiate(PlayerEffects[i], transform);
+            effectsPool.Add(_eff);
+            _eff.gameObject.SetActive(false);
+        }
         ui_master = FindObjectOfType<UI_Master_Script>();
     }
 
@@ -67,19 +74,26 @@ public class Player_Controller_Script : MonoBehaviour
         if (!isGrounded)
         {
             yMove += gravity * Time.deltaTime;
+            if (Input.GetButtonDown("Fire3") && tornadoPoints >= 20)
+            {
+                yMove = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                playerAudio.PlayOneShot(playerSounds[6]);
+                PlayEffectPool(3);
+                tornadoPoints = ui_master.IncreaseSugarScore(-20);
+            }
         }
         else
         {
             if (dir.y < 0)
             {
                 yMove = -2f;
-                _land.gameObject.SetActive(true);
-                _land.Play(true);
+                PlayEffectPool(1);
             }
             if(Input.GetButtonDown("Jump"))
             {
                 yMove = Mathf.Sqrt(jumpHeight * -2f * gravity);
                 playerAudio.PlayOneShot(playerSounds[0]);
+                
             }
         }
 
@@ -116,16 +130,23 @@ public class Player_Controller_Script : MonoBehaviour
     {
         if(other.gameObject.layer == 4)
         {
-            _splash.gameObject.SetActive(true);
-            _splash.Play();
+            PlayEffectPool(0);
             playerAudio.PlayOneShot(playerSounds[1], 0.6f);
         }
         if (other.gameObject.CompareTag("Collectable"))
         {
             Debug.Log("Collided with sugar");
             playerAudio.PlayOneShot(playerSounds[4]);
-            playerAudio.PlayOneShot(playerSounds[5]);
+            playerAudio.PlayOneShot(playerSounds[5], 0.6f);
             other.gameObject.transform.parent.gameObject.SetActive(false);
+            tornadoPoints = ui_master.IncreaseSugarScore(10);
+            PlayEffectPool(2);
         }
+    }
+
+    void PlayEffectPool(int _index)
+    {
+        effectsPool[_index].gameObject.SetActive(true);
+        effectsPool[_index].Play();
     }
 }

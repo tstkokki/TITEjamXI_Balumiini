@@ -4813,6 +4813,8 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 512
+  tornadoPoints: 0
+  tornadoCD: 1
   PlayerEffects:
   - {fileID: 198039942544698878, guid: 77c69ec12208c4c4380d15e30b6f8f68, type: 3}
   - {fileID: 7984209679734807346, guid: 3c9c1c534d238744d95a8759d0a090db, type: 3}
