@@ -27,7 +27,7 @@ public class Platform_Master_Script : MonoBehaviour
         {
             nextPlat = platformPooler.GetPooledObjecT(true, platformCount);
             platformCount++;
-            if(!Mathf.Approximately(nextPlat.transform.localScale.x, (10- (platScale*0.5f))))
+            if(!Mathf.Approximately(nextPlat.transform.localScale.x, (10- (platScale*0.5f))) && (10 - (platScale*0.5f)) < nextPlat.transform.localScale.x)
             {
                 Debug.Log(platScale + " plat doesn't match" + nextPlat.transform.localScale.x);
                 nextPlat.transform.localScale = new Vector3(nextPlat.transform.localScale.x-(platScale*0.5f), 0.5f, 1);

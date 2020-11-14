@@ -7,22 +7,28 @@ public class EvilWaterScript : MonoBehaviour
 {
     public float risingSpeed = 0.5f;
     Vector3 rising;
-    
+    private bool touchWater = false;
 
     private void FixedUpdate()
     {
-        rising = new Vector3(0, risingSpeed, 0);
-        //continuously rising water
-        transform.Translate(rising*Time.deltaTime);
+        if (!touchWater)
+        {
+            rising = new Vector3(0, risingSpeed, 0);
+            //continuously rising water
+            transform.Translate(rising*Time.deltaTime);
+        }
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("SugarDaddy"))
+        if (other.gameObject.CompareTag("SugarDaddy") && !touchWater)
         {
+            touchWater = true;
+
             //if player is in water, reload scene
-            SceneManager.LoadScene(1);
+
+            //SceneManager.LoadScene(1);
         }
     }
 
