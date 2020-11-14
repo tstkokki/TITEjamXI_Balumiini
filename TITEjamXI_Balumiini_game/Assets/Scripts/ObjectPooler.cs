@@ -26,15 +26,25 @@ public class ObjectPooler : MonoBehaviour
         }
     }
 
-    public GameObject GetPooledObjecT()
+    public GameObject GetPooledObjecT(bool isDisabling = false, int stepCount = 0)
     {
-        for (int i = 0;i < poolList.Count; i++)
+        if (isDisabling)
         {
-            if (!poolList[i].activeInHierarchy)
+            return poolList[stepCount];
+        } else
+        {
+            for (int i = 0;i < poolList.Count; i++)
             {
-                return poolList[i];
+                if (!isDisabling)
+                {
+                
+                    if (!poolList[i].activeInHierarchy)
+                    {
+                        return poolList[i];
+                    }
+                }
             }
+            return null;
         }
-        return null;
     }
 }

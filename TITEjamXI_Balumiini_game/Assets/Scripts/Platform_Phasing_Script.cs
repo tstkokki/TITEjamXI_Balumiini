@@ -34,6 +34,7 @@ public class Platform_Phasing_Script : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            //if player's foot touches top part of platform, set collider to solid
             collider.isTrigger = false;
             setTrigger = false;
         }

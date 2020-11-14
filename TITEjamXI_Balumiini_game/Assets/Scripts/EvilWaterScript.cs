@@ -5,24 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class EvilWaterScript : MonoBehaviour
 {
-    Vector3 rising = new Vector3(0, 0.2f, 0);
+    public float risingSpeed = 0.5f;
+    Vector3 rising;
     
 
     private void FixedUpdate()
     {
+        rising = new Vector3(0, risingSpeed, 0);
+        //continuously rising water
         transform.Translate(rising*Time.deltaTime);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("SugarDaddy"))
         {
+            //if player is in water, reload scene
             SceneManager.LoadScene(1);
         }
     }
