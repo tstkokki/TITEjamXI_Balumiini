@@ -4813,11 +4813,17 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 512
-  PlayerEffects: []
+  PlayerEffects:
+  - {fileID: 198039942544698878, guid: 77c69ec12208c4c4380d15e30b6f8f68, type: 3}
+  - {fileID: 7984209679734807346, guid: 3c9c1c534d238744d95a8759d0a090db, type: 3}
   playerAudio: {fileID: 0}
   playerSounds:
   - {fileID: 8300000, guid: c592f1cba7b9ffb499ccbc86ac008040, type: 3}
   - {fileID: 8300000, guid: 03903c64314a4604787aa9fd6f1b2b06, type: 3}
+  - {fileID: 8300000, guid: 85f813050c362d04f90215d004a105dc, type: 3}
+  - {fileID: 8300000, guid: 4151b03571e06574ca33c362fb7317cc, type: 3}
+  - {fileID: 8300000, guid: 8804d883c7051df448e965b9b84497ab, type: 3}
+  - {fileID: 8300000, guid: e5d7ec0f9d52540479c8d27c8ac864c3, type: 3}
 --- !u!143 &4854083559891012719
 CharacterController:
   m_ObjectHideFlags: 0

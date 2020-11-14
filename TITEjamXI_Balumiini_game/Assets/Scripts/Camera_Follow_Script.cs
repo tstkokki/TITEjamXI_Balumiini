@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Camera_Follow_Script : MonoBehaviour
 {
@@ -11,12 +9,6 @@ public class Camera_Follow_Script : MonoBehaviour
     {
         camPos = transform.position;
         Player = FindObjectOfType<Player_Controller_Script>().gameObject.transform;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void LateUpdate()
