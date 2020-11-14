@@ -7,6 +7,7 @@ public class Player_Controller_Script : MonoBehaviour
 {
     private CharacterController sugarCtrl;
     public UI_Master_Script ui_master;
+    public bool isAlive = true;
     [Header("Movement")]
     private float xMove = 0f;
     public float moveSpeed = 8f;
@@ -45,6 +46,7 @@ public class Player_Controller_Script : MonoBehaviour
           * 1 = land
           * 2 = pow
           * 3 = tornado
+          * 4 = bubbles
          */
 
     // Start is called before the first frame update
@@ -65,7 +67,10 @@ public class Player_Controller_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MovePlayer();
+        if (isAlive)
+        {
+            MovePlayer();
+        }
     }
 
     void MovePlayer()
@@ -125,6 +130,12 @@ public class Player_Controller_Script : MonoBehaviour
         }
     }
 
+    public void KillPlayer()
+    {
+        isAlive = false;
+        PlayEffectPool(4);
+        ui_master.CalculateScore();
+    }
 
     private void OnTriggerEnter(Collider other)
     {

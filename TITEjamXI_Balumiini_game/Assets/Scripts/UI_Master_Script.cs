@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UI_Master_Script : MonoBehaviour
 {
@@ -24,7 +25,11 @@ public class UI_Master_Script : MonoBehaviour
     public EvilWaterScript evilWater;
     public Sugar_Master_Script sugarMaster;
 
-
+    [Header("Game Over UI")]
+    public GameObject GameOverPanel;
+    public TextMeshProUGUI FinalScoreTexts;
+    public Button RetryButton;
+    public Button ReturnToMenuButton;
 
     public enum WaterState
     {
@@ -140,4 +145,39 @@ public class UI_Master_Script : MonoBehaviour
         scoreText.text = sugarScore.ToString() + " sucrose";
         return sugarScore;
     }
+
+    #region Game Over menu stuff
+    public void CalculateScore()
+    {
+        //show game over paneö
+        GameOverPanel.SetActive(true);
+
+        //calculate final score
+        //sugar points
+        FinalScoreTexts.text = sugarScore.ToString();
+        //time bonus
+        FinalScoreTexts.text += "\n" + playTime.ToString("0.00");
+        //height bonus
+        FinalScoreTexts.text += "\n" + curHeight.ToString("0.00");
+        //total
+        FinalScoreTexts.text += "\n\n" + ((float)sugarScore + playTime + curHeight).ToString("0");
+
+        // create listeners for buttons
+        RetryButton.onClick.AddListener(ClickReloadLevel);
+        ReturnToMenuButton.onClick.AddListener(ReturnToMenu);
+    }
+
+    void ClickReloadLevel()
+    {
+        //reload play scene
+        SceneManager.LoadScene(1);
+    }
+
+    void ReturnToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    #endregion
+
 }

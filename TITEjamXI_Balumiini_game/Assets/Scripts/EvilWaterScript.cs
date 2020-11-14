@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class EvilWaterScript : MonoBehaviour
 {
@@ -27,7 +26,7 @@ public class EvilWaterScript : MonoBehaviour
             touchWater = true;
 
             //if player is in water, reload scene
-
+            other.gameObject.GetComponent<Player_Controller_Script>().KillPlayer();
             //SceneManager.LoadScene(1);
         }
     }

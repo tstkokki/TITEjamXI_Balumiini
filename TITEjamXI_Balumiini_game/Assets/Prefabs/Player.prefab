@@ -4803,6 +4803,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui_master: {fileID: 0}
+  isAlive: 1
   moveSpeed: 8
   inputAcceleration: 0
   inputThreshold: 0.2
@@ -4818,6 +4819,9 @@ MonoBehaviour:
   PlayerEffects:
   - {fileID: 198039942544698878, guid: 77c69ec12208c4c4380d15e30b6f8f68, type: 3}
   - {fileID: 7984209679734807346, guid: 3c9c1c534d238744d95a8759d0a090db, type: 3}
+  - {fileID: 19800004, guid: fb7b0526ade434043b350a180d741cf3, type: 3}
+  - {fileID: 19800000, guid: 352304b7fbe11f445970df6ae36e6227, type: 3}
+  - {fileID: 19800000, guid: 18204b98237ccb540808f2cd2d78c2c8, type: 3}
   playerAudio: {fileID: 0}
   playerSounds:
   - {fileID: 8300000, guid: c592f1cba7b9ffb499ccbc86ac008040, type: 3}
@@ -4826,6 +4830,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4151b03571e06574ca33c362fb7317cc, type: 3}
   - {fileID: 8300000, guid: 8804d883c7051df448e965b9b84497ab, type: 3}
   - {fileID: 8300000, guid: e5d7ec0f9d52540479c8d27c8ac864c3, type: 3}
+  - {fileID: 8300000, guid: 87932257b63bac54da62b396d038ac69, type: 3}
 --- !u!143 &4854083559891012719
 CharacterController:
   m_ObjectHideFlags: 0
