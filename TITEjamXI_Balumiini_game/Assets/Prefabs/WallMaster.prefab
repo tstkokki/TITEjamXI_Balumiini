@@ -45,6 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff033647c6c84b046aba6ad577d6e6af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wallCount: 0
+  maxCount: 0
+  wallIteration: 0
 --- !u!114 &3367388929487548257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,7 +63,7 @@ MonoBehaviour:
   poolList: []
   pooledObject: {fileID: 1979001832951711615, guid: f5387df605d20944881fe926fe390e3e,
     type: 3}
-  poolAmount: 3
+  poolAmount: 6
 --- !u!1001 &7582827883993286149
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -72,6 +75,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: wallorigin
+      objectReference: {fileID: 0}
+    - target: {fileID: 5152333114922250359, guid: f5387df605d20944881fe926fe390e3e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5152333114997574570, guid: f5387df605d20944881fe926fe390e3e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5152333114997574583, guid: f5387df605d20944881fe926fe390e3e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955808582707308322, guid: f5387df605d20944881fe926fe390e3e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8198594645648176585, guid: f5387df605d20944881fe926fe390e3e,
         type: 3}

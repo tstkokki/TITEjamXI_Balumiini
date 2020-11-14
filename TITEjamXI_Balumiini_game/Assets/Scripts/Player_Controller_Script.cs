@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Player_Controller_Script : MonoBehaviour
 {
@@ -25,10 +26,18 @@ public class Player_Controller_Script : MonoBehaviour
     [Header("Effects")]
     public ParticleSystem SplashEffect;
     private ParticleSystem _splash;
+    public AudioSource playerAudio;
+    public AudioClip []playerSounds;
+    /*Sound listing
+     0 = Jump
+     1 = water splash
+         */
+
     // Start is called before the first frame update
     void Start()
     {
         sugarCtrl = GetComponent<CharacterController>();
+        playerAudio = GetComponent<AudioSource>();
         _splash = Instantiate(SplashEffect, transform);
         _splash.gameObject.SetActive(false);
     }
@@ -52,6 +61,7 @@ public class Player_Controller_Script : MonoBehaviour
             if(Input.GetButtonDown("Jump"))
             {
                 yMove = Mathf.Sqrt(jumpHeight * -2f * gravity);
+                playerAudio.PlayOneShot(playerSounds[0]);
             }
         }
 
@@ -79,6 +89,7 @@ public class Player_Controller_Script : MonoBehaviour
         {
             _splash.gameObject.SetActive(true);
             _splash.Play();
+            playerAudio.PlayOneShot(playerSounds[1], 0.6f);
         }
     }
 }

@@ -58,6 +58,8 @@ MonoBehaviour:
     m_Bits: 512
   SplashEffect: {fileID: 198039942544698878, guid: 77c69ec12208c4c4380d15e30b6f8f68,
     type: 3}
+  playerAudio: {fileID: 0}
+  playerSounds: []
 --- !u!143 &4854083559891012719
 CharacterController:
   m_ObjectHideFlags: 0
