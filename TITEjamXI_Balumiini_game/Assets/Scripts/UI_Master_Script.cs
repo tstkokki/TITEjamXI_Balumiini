@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class UI_Master_Script : MonoBehaviour
@@ -24,6 +25,9 @@ public class UI_Master_Script : MonoBehaviour
     public Wall_Master_Script wallMaster;
     public EvilWaterScript evilWater;
     public Sugar_Master_Script sugarMaster;
+    public AudioMixer sugarMixer;
+    public AudioMixerSnapshot lowPass;
+    public AudioMixerSnapshot normalAudio;
 
     [Header("Game Over UI")]
     public GameObject GameOverPanel;
@@ -46,6 +50,7 @@ public class UI_Master_Script : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        normalAudio.TransitionTo(0.2f);
         Player = FindObjectOfType<Player_Controller_Script>().gameObject.transform;
         platMaster = FindObjectOfType<Platform_Master_Script>();
         wallMaster = FindObjectOfType<Wall_Master_Script>();
@@ -96,6 +101,7 @@ public class UI_Master_Script : MonoBehaviour
         if (curTide == WaterState.Flood && playTime >= 180f)
         {
             DifficultyUpdate();
+            lowPass.TransitionTo(1f);
         }
     }
 
