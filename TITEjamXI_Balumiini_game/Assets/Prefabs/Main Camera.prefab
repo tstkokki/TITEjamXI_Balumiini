@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8499454237125068875}
   - component: {fileID: 8499454237125068887}
   - component: {fileID: 8499454237125068886}
+  - component: {fileID: 427687698}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -130,6 +131,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 763cfabba1f414a4f9c53227b43db776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &427687698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8499454237125068874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344a297128965be4ba57bc4ef9035bdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageEffect: {fileID: 2100000, guid: c7c580b1bfc7c67498a0a3b79c7212b9, type: 2}
 --- !u!1001 &8065347399139825683
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -150,7 +164,7 @@ PrefabInstance:
     - target: {fileID: 369656999239364833, guid: bc00335278e488440a11e024e837be91,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 369656999239364833, guid: bc00335278e488440a11e024e837be91,
         type: 3}
@@ -287,6 +301,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: mummo1
       objectReference: {fileID: 0}
+    - target: {fileID: 4058854842844121882, guid: 8a1314f502b7dcc49bb0d38f37de87dc,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 04a711b1d1f37804886afc311af3e178, type: 2}
+    - target: {fileID: 4123177642777943866, guid: 8a1314f502b7dcc49bb0d38f37de87dc,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 40c65e85789468043b8753eab4e1442e, type: 2}
     - target: {fileID: 5866666021909216657, guid: 8a1314f502b7dcc49bb0d38f37de87dc,
         type: 3}
       propertyPath: m_Controller
