@@ -6,9 +6,11 @@ using UnityEngine.Audio;
 public class Player_Controller_Script : MonoBehaviour
 {
     private CharacterController sugarCtrl;
+    public Animator sugarAnimator;
     public Transform playerModel;
     public UI_Master_Script ui_master;
     public bool isAlive = true;
+    private string[] SugarTriggers = { "Run", "Jump", "Die", "Idle" };
     [Header("Movement")]
     private float xMove = 0f;
     public float moveSpeed = 8f;
@@ -73,6 +75,7 @@ public class Player_Controller_Script : MonoBehaviour
         {
             MovePlayer();
         }
+
     }
 
     void MovePlayer()
@@ -87,6 +90,7 @@ public class Player_Controller_Script : MonoBehaviour
                 playerAudio.PlayOneShot(playerSounds[6]);
                 PlayEffectPool(3);
                 tornadoPoints = ui_master.IncreaseSugarScore(-20);
+                SugarAnimationHandler("Jump");
             }
         }
         else
@@ -95,12 +99,15 @@ public class Player_Controller_Script : MonoBehaviour
             {
                 yMove = -2f;
                 PlayEffectPool(1);
+                SugarAnimationHandler("Idle");
+
             }
-            if(Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump"))
             {
                 yMove = Mathf.Sqrt(jumpHeight * -2f * gravity);
                 playerAudio.PlayOneShot(playerSounds[0]);
-                
+                SugarAnimationHandler("Jump");
+
             }
         }
 
@@ -110,8 +117,14 @@ public class Player_Controller_Script : MonoBehaviour
             if (Input.GetAxis("Horizontal") > inputThreshold || Input.GetAxis("Horizontal") < -inputThreshold)
             {
                 xMove = Input.GetAxis("Horizontal");
+                if (isGrounded && !sugarAnimator.GetCurrentAnimatorStateInfo(0).IsName("metarig|Walking")) SugarAnimationHandler("Run");
+
             }
-            else xMove = 0;
+            else
+            {
+                xMove = 0;
+                if (isGrounded && !sugarAnimator.GetCurrentAnimatorStateInfo(0).IsName("metarig|Idle")) SugarAnimationHandler("Idle");
+            }
             inputAcceleration = Mathf.Clamp(Mathf.Sqrt(Mathf.Pow(xMove, 2f)), 0, 1);
         }
         else
@@ -138,6 +151,11 @@ public class Player_Controller_Script : MonoBehaviour
                 playerAudio.PlayOneShot(playerSounds[3]);
             }
             else playerAudio.PlayOneShot(playerSounds[2]);
+            if (isGrounded && !sugarAnimator.GetCurrentAnimatorStateInfo(0).IsName("metarig|Walking"))
+            {
+                Debug.Log("Noh huomenta Pirkko " + xMove);
+                SugarAnimationHandler("Run");
+            }
         }
     }
 
@@ -146,6 +164,7 @@ public class Player_Controller_Script : MonoBehaviour
         isAlive = false;
         PlayEffectPool(4);
         ui_master.CalculateScore();
+        SugarAnimationHandler("Die");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -170,5 +189,14 @@ public class Player_Controller_Script : MonoBehaviour
     {
         effectsPool[_index].gameObject.SetActive(true);
         effectsPool[_index].Play();
+    }
+
+    void SugarAnimationHandler(string _trigger)
+    {
+        for(int i = 0; i < SugarTriggers.Length; i++)
+        {
+            sugarAnimator.ResetTrigger(SugarTriggers[i]);
+        }
+        sugarAnimator.SetTrigger(_trigger);
     }
 }
