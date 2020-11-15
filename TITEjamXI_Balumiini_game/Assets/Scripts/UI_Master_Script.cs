@@ -28,6 +28,7 @@ public class UI_Master_Script : MonoBehaviour
     public Transform dirLight;
     public Transform Dirtarget;
     private float turnTime = 5f;
+    public ParticleSystem tsunamiPart; 
     
     [Header("Masters")]
     public Platform_Master_Script platMaster;
@@ -169,6 +170,7 @@ public class UI_Master_Script : MonoBehaviour
         {
             DifficultyUpdate();
             lowPass.TransitionTo(1f);
+            tsunamiPart.gameObject.SetActive(true);
         }
     }
 
