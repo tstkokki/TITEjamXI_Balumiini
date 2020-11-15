@@ -6,6 +6,7 @@ using UnityEngine.Audio;
 public class Player_Controller_Script : MonoBehaviour
 {
     private CharacterController sugarCtrl;
+    public Transform playerModel;
     public UI_Master_Script ui_master;
     public bool isAlive = true;
     [Header("Movement")]
@@ -14,6 +15,7 @@ public class Player_Controller_Script : MonoBehaviour
     public float inputAcceleration = 0f;
     public float inputThreshold = 0.2f;
     private Vector3 dir = Vector3.zero;
+    private Vector3 rot = Vector3.zero;
     public bool MoveDemo = false;
 
     [Header("Jumping and falling")]
@@ -67,7 +69,7 @@ public class Player_Controller_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isAlive)
+        if (isAlive && ui_master.curPlayState == UI_Master_Script.PlayState.Playing)
         {
             MovePlayer();
         }
@@ -116,10 +118,19 @@ public class Player_Controller_Script : MonoBehaviour
         {
             xMove = Input.GetAxis("Horizontal") * moveSpeed;
         }
-        dir.y = yMove;
         dir.x = xMove;
+        rot.x = xMove;
+        dir.y = yMove;
         //transform.Translate(dir.normalized * moveSpeed * Time.deltaTime);
         sugarCtrl.Move(dir * Time.deltaTime);
+        if (xMove > 0 || xMove < 0)
+        {
+            playerModel.rotation = Quaternion.Slerp(playerModel.rotation, Quaternion.LookRotation(rot.normalized), 0.25f);
+        } else if(Input.GetAxis("Vertical") < 0)
+        {
+            rot = Vector3.back;
+            playerModel.rotation = Quaternion.Slerp(playerModel.rotation, Quaternion.LookRotation(rot.normalized), 0.25f);
+        }
         if (isGrounded && (sugarCtrl.velocity.x > 0 || sugarCtrl.velocity.x < 0) && !playerAudio.isPlaying && sugarCtrl.velocity.y > -1f && sugarCtrl.velocity.y < 1f)
         {
             if(sugarCtrl.velocity.x > 5 || sugarCtrl.velocity.x < -5)

@@ -32,6 +32,22 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!244 &-6728136734838283040
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: bb36ecc1396d9334fbf2b0311e9ec5f7
+  m_EffectName: Distortion
+  m_MixLevel: 79948029822232643a4fe3a056de05e8
+  m_Parameters:
+  - m_ParameterName: Level
+    m_GUID: 44878382e93fb0f42bc3a5486448c201
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!243 &-2350239593665850980
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -48,6 +64,7 @@ AudioMixerGroupController:
   m_Effects:
   - {fileID: -7542162365370829066}
   - {fileID: -7834467135830503420}
+  - {fileID: -6728136734838283040}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -76,7 +93,16 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: ce2339e08b69f5b42b2f87ed5c59b91e
   m_FloatValues:
-    a55e258cc315aed47b86fee4903af083: 365
+    424a68d0d0043d24b88c8d85f00df3c6: 5.1
+    f8c8aa419953a8b4bafe400c80e69184: -7.3
+    44878382e93fb0f42bc3a5486448c201: 0.148
+    8228d5f2bf80513409a3457f2fc25883: 0.445
+    c7956e53f79a26e4d8510e475602dc4d: 0.696
+    0163c356133dfb849ad99eed2d717663: 0.33
+    7f5862989400f3b459e05b5d9b9e99b1: 3.25
+    1aaa2f09b945bf24d9019d6017a34050: 0.664
+    5ce7703c296a30b4ab425e24b2c577d0: 0.304
+    a55e258cc315aed47b86fee4903af083: 1071
   m_TransitionOverrides: {}
 --- !u!241 &24100000
 AudioMixerController:
@@ -106,7 +132,7 @@ AudioMixerController:
     - 06ecd49fb0193684bac783d819148e00
     name: View
   m_CurrentViewIndex: 0
-  m_TargetSnapshot: {fileID: -976204670314059745}
+  m_TargetSnapshot: {fileID: 24500006}
 --- !u!243 &24300002
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -152,6 +178,7 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 375a75b1af4cb504da033984041434a9
   m_FloatValues:
+    f8c8aa419953a8b4bafe400c80e69184: -13.4
     a55e258cc315aed47b86fee4903af083: 20000
   m_TransitionOverrides: {}
 --- !u!243 &260270142516414422

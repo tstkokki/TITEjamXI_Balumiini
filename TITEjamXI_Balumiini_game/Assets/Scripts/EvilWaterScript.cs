@@ -6,7 +6,7 @@ public class EvilWaterScript : MonoBehaviour
 {
     public float risingSpeed = 0.5f;
     Vector3 rising;
-    private bool touchWater = false;
+    public bool touchWater = false;
 
     private void FixedUpdate()
     {

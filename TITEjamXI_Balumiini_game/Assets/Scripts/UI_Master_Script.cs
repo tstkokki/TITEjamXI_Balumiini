@@ -14,20 +14,40 @@ public class UI_Master_Script : MonoBehaviour
     private int platScale = 1;
     public float playTime = 0f;
     public int sugarScore = 0;
-    public TextMeshProUGUI heightText;
-    public TextMeshProUGUI timeText;
-    public TextMeshProUGUI diffText;
-    public TextMeshProUGUI scoreText;
+    
     private Transform Player;
 
+    public enum PlayState
+    {
+        Playing = 0,
+        Paused = 1,
+        Dead = 2
+    }
+
+    public PlayState curPlayState;
+    public Transform dirLight;
+    public Transform Dirtarget;
+    private float turnTime = 5f;
+    
     [Header("Masters")]
     public Platform_Master_Script platMaster;
     public Wall_Master_Script wallMaster;
     public EvilWaterScript evilWater;
     public Sugar_Master_Script sugarMaster;
+
+    [Header("Audio")]
     public AudioMixer sugarMixer;
     public AudioMixerSnapshot lowPass;
     public AudioMixerSnapshot normalAudio;
+    public AudioClip earthquake;
+    public AudioSource ui_Audio;
+
+    [Header("Play UI")]
+    public TextMeshProUGUI heightText;
+    public TextMeshProUGUI timeText;
+    public TextMeshProUGUI diffText;
+    public TextMeshProUGUI scoreText;
+    public GameObject pauseCanvas;
 
     [Header("Game Over UI")]
     public GameObject GameOverPanel;
@@ -50,6 +70,7 @@ public class UI_Master_Script : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        curPlayState = PlayState.Playing;
         normalAudio.TransitionTo(0.2f);
         Player = FindObjectOfType<Player_Controller_Script>().gameObject.transform;
         platMaster = FindObjectOfType<Platform_Master_Script>();
@@ -62,7 +83,53 @@ public class UI_Master_Script : MonoBehaviour
 
     private void FixedUpdate()
     {
-        CalcTime();
+        if(curPlayState == PlayState.Playing)
+        {
+            CalcTime();
+
+            if(curTide == WaterState.Tsunami && turnTime > 0f)
+            {
+                dirLight.transform.localRotation = Quaternion.Slerp(dirLight.transform.localRotation, Dirtarget.localRotation, 0.02f);
+                turnTime -= Time.deltaTime;
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if(curPlayState == PlayState.Dead)
+        {
+            if (Input.GetButtonDown("Jump"))
+            {
+                ClickReloadLevel();
+            }
+            if (Input.GetButtonDown("Start") || Input.GetKeyDown(KeyCode.Escape))
+            {
+                ReturnToMenu();
+            }
+        } else
+        {
+            if(curPlayState == PlayState.Paused && Input.GetKeyDown(KeyCode.Backspace))
+            {
+                SceneManager.LoadScene(0);
+            }
+            if (Input.GetButtonDown("Start") || Input.GetKeyDown(KeyCode.Escape))
+            {
+                switch (curPlayState)
+                {
+                    case PlayState.Playing:
+                        curPlayState = PlayState.Paused;
+                        pauseCanvas.SetActive(true);
+                        evilWater.touchWater = true;
+                        break;
+                    case PlayState.Paused:
+                        curPlayState = PlayState.Playing;
+                        pauseCanvas.SetActive(false);
+                        evilWater.touchWater = false;
+                        break;
+                }
+            }
+        }
     }
 
     private void LateUpdate()
@@ -121,6 +188,7 @@ public class UI_Master_Script : MonoBehaviour
         diffText.text = _diff;
         platScale = (int)curTide;
         platMaster.SetPlatScale(platScale);
+        ui_Audio.PlayOneShot(earthquake);
     }
 
     void CalcPlayerHeight()
@@ -171,6 +239,7 @@ public class UI_Master_Script : MonoBehaviour
         // create listeners for buttons
         RetryButton.onClick.AddListener(ClickReloadLevel);
         ReturnToMenuButton.onClick.AddListener(ReturnToMenu);
+        curPlayState = PlayState.Dead;
     }
 
     void ClickReloadLevel()
