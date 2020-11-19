@@ -100,7 +100,7 @@ public class UI_Master_Script : MonoBehaviour
     {
         if(curPlayState == PlayState.Dead)
         {
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Fire2"))
             {
                 ClickReloadLevel();
             }

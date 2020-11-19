@@ -71,7 +71,7 @@ public class Player_Controller_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isAlive && ui_master.curPlayState == UI_Master_Script.PlayState.Playing)
+        if (ui_master == null || (isAlive && ui_master.curPlayState == UI_Master_Script.PlayState.Playing))
         {
             MovePlayer();
         }
@@ -109,6 +109,11 @@ public class Player_Controller_Script : MonoBehaviour
                 SugarAnimationHandler("Jump");
 
             }
+
+            //if (Input.GetButtonDown("Fire1"))
+            //{
+            //    sugarAnimator.Play("metarig|Mainmenu", 0);
+            //}
         }
 
 
