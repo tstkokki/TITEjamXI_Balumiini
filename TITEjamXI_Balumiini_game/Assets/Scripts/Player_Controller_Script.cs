@@ -84,6 +84,8 @@ public class Player_Controller_Script : MonoBehaviour
         if (!isGrounded)
         {
             yMove += gravity * Time.deltaTime;
+            yMove = Mathf.Clamp(yMove, -6f, 200f);
+            Debug.Log(yMove);
             if (Input.GetButtonDown("Fire3") && tornadoPoints >= 20)
             {
                 yMove = Mathf.Sqrt(jumpHeight * -2f * gravity);
@@ -97,7 +99,7 @@ public class Player_Controller_Script : MonoBehaviour
         {
             if (dir.y < 0)
             {
-                yMove = -2f;
+                yMove = -5f;
                 PlayEffectPool(1);
                 SugarAnimationHandler("Idle");
 
@@ -158,7 +160,6 @@ public class Player_Controller_Script : MonoBehaviour
             else playerAudio.PlayOneShot(playerSounds[2]);
             if (isGrounded && !sugarAnimator.GetCurrentAnimatorStateInfo(0).IsName("metarig|Walking"))
             {
-                Debug.Log("Noh huomenta Pirkko " + xMove);
                 SugarAnimationHandler("Run");
             }
         }
@@ -183,7 +184,7 @@ public class Player_Controller_Script : MonoBehaviour
         {
             Debug.Log("Collided with sugar");
             playerAudio.PlayOneShot(playerSounds[4]);
-            playerAudio.PlayOneShot(playerSounds[5], 0.6f);
+            playerAudio.PlayOneShot(playerSounds[5], 0.3f);
             other.gameObject.transform.parent.gameObject.SetActive(false);
             tornadoPoints = ui_master.IncreaseSugarScore(10);
             PlayEffectPool(2);
